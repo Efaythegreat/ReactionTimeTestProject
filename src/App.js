@@ -33,17 +33,44 @@ function click(style, setStyle, setTitle, setButton) {
   console.log("click");
   console.log(style);
   if (style === "styleBlockBegin") {
-    console.log("inside");
-    setStyle("StyleBlockWait");
-    setTitle("Wait For It");
-    setButton("...");
+    console.log(style);
+    redScreen(setStyle, setTitle, setButton); // go to red => wait => go to green
+    waitT(setStyle, setTitle, setButton, style);
+  } else if (style === "styleBlockWait") {
+    // too early and go to Wait
+    oh_no(setStyle, setTitle, setButton);
+  } else if (style === "oh_no") {
+    // back to red
+    redScreen(setStyle, setTitle, setButton);
+    waitT(setStyle, setTitle, setButton, style, true);
   }
 }
 
-/*
-function randomN(){
-  Math.floor(Math.random() * 10) + 2;}
-*/
+function waitT(setStyle, setTitle, setButton, style, maxTrue) {
+  //Changes to Green
+  let waitTime = Math.floor(Math.random() * 4000) + 1000;
+  setTimeout(() => {
+    if (style === "styleBlockWait") {
+      setStyle("styleBlockGreen");
+      setTitle("Click!!!");
+      setButton("Now");
+    }
+  }, waitTime);
+}
+
+function oh_no(setStyle, setTitle, setButton) {
+  //changes to "oh no"
+  setStyle("oh_no");
+  setTitle("You Clicked too Early!");
+  setButton("Try Again");
+}
+
+function redScreen(setStyle, setTitle, setButton) {
+  //Changes to wait
+  setStyle("styleBlockWait");
+  setTitle("Wait For It");
+  setButton("...");
+}
 
 /* 
   1. when click button => 
@@ -59,60 +86,5 @@ function randomN(){
 */
 
 /*
-const timer = document.getElementById('stopwatch');
 
-var hr = 0;
-var min = 0;
-var sec = 0;
-var stoptime = true;
-
-function startTimer() {
-  if (stoptime == true) {
-        stoptime = false;
-        timerCycle();
-    }
-}
-function stopTimer() {
-  if (stoptime == false) {
-    stoptime = true;
-  }
-}
-
-function timerCycle() {
-    if (stoptime == false) {
-    sec = parseInt(sec);
-    min = parseInt(min);
-    hr = parseInt(hr);
-
-    sec = sec + 1;
-
-    if (sec == 60) {
-      min = min + 1;
-      sec = 0;
-    }
-    if (min == 60) {
-      hr = hr + 1;
-      min = 0;
-      sec = 0;
-    }
-
-    if (sec < 10 || sec == 0) {
-      sec = '0' + sec;
-    }
-    if (min < 10 || min == 0) {
-      min = '0' + min;
-    }
-    if (hr < 10 || hr == 0) {
-      hr = '0' + hr;
-    }
-
-    timer.innerHTML = hr + ':' + min + ':' + sec;
-
-    setTimeout("timerCycle()", 1000);
-  }
-}
-
-function resetTimer() {
-    timer.innerHTML = '00:00:00';
-}
 */

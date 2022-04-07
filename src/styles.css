@@ -8,3 +8,11 @@
 .styleBlockBegin {
   background-color: lightblue;
 }
+
+.styleBlockWait {
+  background-color: #ff4e29;
+}
+
+.styleBlockGreen {
+  background-color: #37e016;
+}
