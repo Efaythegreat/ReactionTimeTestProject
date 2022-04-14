@@ -33,7 +33,7 @@ function click(style, setStyle, setTitle, setButton) {
   console.log("click");
   console.log(style);
   if (style === "styleBlockBegin") {
-    console.log(style);
+    console.log(style + " on if-statement of click");
     redScreen(setStyle, setTitle, setButton); // go to red => wait => go to green
     waitT(setStyle, setTitle, setButton, style);
   } else if (style === "styleBlockWait") {
@@ -50,12 +50,14 @@ function waitT(setStyle, setTitle, setButton, style, maxTrue) {
   //Changes to Green
   let waitTime = Math.floor(Math.random() * 4000) + 1000;
   setTimeout(() => {
-    if (style === "styleBlockWait") {
-      setStyle("styleBlockGreen");
-      setTitle("Click!!!");
-      setButton("Now");
-    }
+    //if (style === "styleBlockWait" || maxTrue) {
+    setStyle("styleBlockGreen");
+    setTitle("Click!!!");
+    setButton("Now");
+    console.log("waiting");
+    //}
   }, waitTime);
+  console.log(style + " End of waitT");
 }
 
 function oh_no(setStyle, setTitle, setButton) {
@@ -67,9 +69,11 @@ function oh_no(setStyle, setTitle, setButton) {
 
 function redScreen(setStyle, setTitle, setButton) {
   //Changes to wait
+  console.log("redBegin");
   setStyle("styleBlockWait");
   setTitle("Wait For It");
   setButton("...");
+  console.log("redEnd");
 }
 
 /* 
