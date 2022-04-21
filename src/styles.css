@@ -16,3 +16,8 @@
 .styleBlockGreen {
   background-color: #37e016;
 }
+
+.styleBlockBlue{
+  background-color: blue;
+  color: white;
+}

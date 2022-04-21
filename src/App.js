@@ -32,6 +32,7 @@ function Menu(props) {
 function click(style, setStyle, setTitle, setButton) {
   console.log("click");
   console.log(style);
+
   if (style === "styleBlockBegin") {
     console.log(style + " on if-statement of click");
     redScreen(setStyle, setTitle, setButton); // go to red => wait => go to green
@@ -41,15 +42,26 @@ function click(style, setStyle, setTitle, setButton) {
     oh_no(setStyle, setTitle, setButton);
   } else if (style === "oh_no") {
     // back to red
+    // clearTimeout(timer);
     redScreen(setStyle, setTitle, setButton);
-    waitT(setStyle, setTitle, setButton, style, true);
+    waitT(setStyle, setTitle, setButton, style);
+  } else if (style === "styleBlockGreen") {
+    //goes to blue
+    blueScreen(setStyle, setTitle, setButton);
+  } else if (style === "styleBlockBlue") {
+    setStyle("styleBlockBegin");
+    setTitle("Reaction Time Test");
+    setButton("Click to Start");
   }
 }
+let timer;
 
-function waitT(setStyle, setTitle, setButton, style, maxTrue) {
+function waitT(setStyle, setTitle, setButton, style) {
   //Changes to Green
+
   let waitTime = Math.floor(Math.random() * 4000) + 1000;
-  setTimeout(() => {
+
+  timer = setTimeout(() => {
     //if (style === "styleBlockWait" || maxTrue) {
     setStyle("styleBlockGreen");
     setTitle("Click!!!");
@@ -62,6 +74,7 @@ function waitT(setStyle, setTitle, setButton, style, maxTrue) {
 
 function oh_no(setStyle, setTitle, setButton) {
   //changes to "oh no"
+  clearTimeout(timer);
   setStyle("oh_no");
   setTitle("You Clicked too Early!");
   setButton("Try Again");
@@ -74,6 +87,12 @@ function redScreen(setStyle, setTitle, setButton) {
   setTitle("Wait For It");
   setButton("...");
   console.log("redEnd");
+}
+
+function blueScreen(setStyle, setTitle, setButton) {
+  setStyle("styleBlockBlue");
+  setTitle("(time) ms");
+  setButton("Restart");
 }
 
 /* 
