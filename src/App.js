@@ -15,28 +15,54 @@ function Menu(props) {
   const [title, setTitle] = useState("Reaction Time Test");
   const [buttonName, setButtonName] = useState("Click to Start");
 
+  const [timerOn, setTimerOn] = useState(false);
+  const [timerTime, setTimerTime] = useState(0);
+
+  function startTimer() {
+    setTimerOn(true);
+    setTimerTime(timerTime);
+    let startTime = Date.now();
+
+    var timer = setInterval(function () {
+      setTimerTime(Date.now() - startTime);
+      console.log(timerTime);
+    }, 500);
+  }
+
+  function stopTimer() {
+    setTimerOn(false);
+    clearInterval();
+  }
+
   return (
     <div className={props.style}>
       <h1>{title}</h1>
       <button
         onClick={() =>
-          click(props.style, props.setStyle, setTitle, setButtonName)
+          click(
+            props.style,
+            props.setStyle,
+            setTitle,
+            setButtonName,
+            startTimer
+          )
         }
       >
         {buttonName}
       </button>
+      <p>{timerTime}</p>
     </div>
   );
 }
 
-function click(style, setStyle, setTitle, setButton) {
+function click(style, setStyle, setTitle, setButton, startTimer) {
   console.log("click");
   console.log(style);
 
   if (style === "styleBlockBegin") {
     console.log(style + " on if-statement of click");
     redScreen(setStyle, setTitle, setButton); // go to red => wait => go to green
-    waitT(setStyle, setTitle, setButton, style);
+    waitT(setStyle, setTitle, setButton, style, startTimer);
   } else if (style === "styleBlockWait") {
     // too early and go to Wait
     oh_no(setStyle, setTitle, setButton);
@@ -44,7 +70,7 @@ function click(style, setStyle, setTitle, setButton) {
     // back to red
     // clearTimeout(timer);
     redScreen(setStyle, setTitle, setButton);
-    waitT(setStyle, setTitle, setButton, style);
+    waitT(setStyle, setTitle, setButton, style, startTimer);
   } else if (style === "styleBlockGreen") {
     //goes to blue
     blueScreen(setStyle, setTitle, setButton);
@@ -56,7 +82,7 @@ function click(style, setStyle, setTitle, setButton) {
 }
 let timer;
 
-function waitT(setStyle, setTitle, setButton, style) {
+function waitT(setStyle, setTitle, setButton, style, startTimer) {
   //Changes to Green
 
   let waitTime = Math.floor(Math.random() * 4000) + 1000;
@@ -66,6 +92,8 @@ function waitT(setStyle, setTitle, setButton, style) {
     setStyle("styleBlockGreen");
     setTitle("Click!!!");
     setButton("Now");
+    startTimer();
+
     console.log("waiting");
     //}
   }, waitTime);

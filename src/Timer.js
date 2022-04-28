@@ -1,29 +1,30 @@
 import React from "react";
 
+function State(props) {}
+
+/*
 var startTimer = false;
 
-function toggleTimer(){
-  if (startTimer === false){
+function toggleTimer() {
+  if (startTimer === false) {
     startTimer = true;
-  }else{
+  } else {
     startTimer = false;
   }
 }
 
-
-function stopWatch(){
+function stopWatch() {
   let time = 0;
   let timer;
 
-  if(startTimer){
+  if (startTimer) {
     timer = setTimeout(() => {
-    time += 1;
-  
-    setTimeout(stopWatch(), 1)
-    }, 1);  
+      time += 1;
+
+      
+
+      setTimeout(stopWatch(), 1);
+    }, 1);
   }
-
-  
-  
-
 }
+*/
