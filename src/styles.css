@@ -6,6 +6,18 @@
 }
 
 button {
+  width: 200px;
+  height: 100px;
+  border: solid gray 1px;
+  background-color: #d4f1f4;
+  border-bottom: 4px solid black;
+  border-right: 3px solid black;
+  transition: transform 200ms;
+}
+
+button:active {
+  transform: translateY(4px);
+  border: solid gray 1px;
 }
 
 .styleBlockBegin {

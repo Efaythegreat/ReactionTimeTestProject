@@ -26,7 +26,7 @@ function Menu(props) {
     timerChangeToBlue = setInterval(function () {
       setTimerTime(Date.now() - startTime);
       console.log(timerTime);
-    }, 10);
+    }, 5);
   }
 
   /* Example
@@ -63,7 +63,16 @@ function Menu(props) {
   );
 }
 
-function click(style, setStyle, setTitle, setButton, startTimer, stopTimer, setTimerTime, timerTime) {
+function click(
+  style,
+  setStyle,
+  setTitle,
+  setButton,
+  startTimer,
+  stopTimer,
+  setTimerTime,
+  timerTime
+) {
   console.log("click");
   console.log(style);
 
@@ -81,7 +90,7 @@ function click(style, setStyle, setTitle, setButton, startTimer, stopTimer, setT
     waitT(setStyle, setTitle, setButton, style, startTimer);
   } else if (style === "styleBlockGreen") {
     //goes to blue
-    stopTimer()
+    stopTimer();
     blueScreen(setStyle, setTitle, setButton, timerTime);
   } else if (style === "styleBlockBlue") {
     setTimerTime(0);
@@ -91,7 +100,7 @@ function click(style, setStyle, setTitle, setButton, startTimer, stopTimer, setT
   }
 }
 let timer;
-let timerChangeToBlue
+let timerChangeToBlue;
 
 function waitT(setStyle, setTitle, setButton, style, startTimer) {
   //Changes to Green
@@ -131,7 +140,7 @@ function redScreen(setStyle, setTitle, setButton) {
 function blueScreen(setStyle, setTitle, setButton, timerTime) {
   // changes to the end screen where it tells the time
   setStyle("styleBlockBlue");
-  setTitle(timerTime+"ms");
+  setTitle(timerTime + "ms");
   setButton("Restart");
 }
 
