@@ -23,15 +23,20 @@ function Menu(props) {
     setTimerTime(timerTime);
     let startTime = Date.now();
 
-    var timer = setInterval(function () {
+    timerChangeToBlue = setInterval(function () {
       setTimerTime(Date.now() - startTime);
       console.log(timerTime);
-    }, 500);
+    }, 10);
   }
+
+  /* Example
+    var interval = setInterval(....)
+    clearInterval(interval)
+  */
 
   function stopTimer() {
     setTimerOn(false);
-    clearInterval();
+    clearInterval(timerChangeToBlue);
   }
 
   return (
@@ -44,7 +49,10 @@ function Menu(props) {
             props.setStyle,
             setTitle,
             setButtonName,
-            startTimer
+            startTimer,
+            stopTimer,
+            setTimerTime,
+            timerTime
           )
         }
       >
@@ -55,7 +63,7 @@ function Menu(props) {
   );
 }
 
-function click(style, setStyle, setTitle, setButton, startTimer) {
+function click(style, setStyle, setTitle, setButton, startTimer, stopTimer, setTimerTime, timerTime) {
   console.log("click");
   console.log(style);
 
@@ -73,14 +81,17 @@ function click(style, setStyle, setTitle, setButton, startTimer) {
     waitT(setStyle, setTitle, setButton, style, startTimer);
   } else if (style === "styleBlockGreen") {
     //goes to blue
-    blueScreen(setStyle, setTitle, setButton);
+    stopTimer()
+    blueScreen(setStyle, setTitle, setButton, timerTime);
   } else if (style === "styleBlockBlue") {
+    setTimerTime(0);
     setStyle("styleBlockBegin");
     setTitle("Reaction Time Test");
     setButton("Click to Start");
   }
 }
 let timer;
+let timerChangeToBlue
 
 function waitT(setStyle, setTitle, setButton, style, startTimer) {
   //Changes to Green
@@ -117,9 +128,10 @@ function redScreen(setStyle, setTitle, setButton) {
   console.log("redEnd");
 }
 
-function blueScreen(setStyle, setTitle, setButton) {
+function blueScreen(setStyle, setTitle, setButton, timerTime) {
+  // changes to the end screen where it tells the time
   setStyle("styleBlockBlue");
-  setTitle("(time) ms");
+  setTitle(timerTime+"ms");
   setButton("Restart");
 }
 

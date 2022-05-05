@@ -5,6 +5,9 @@
   height: 100%;
 }
 
+button {
+}
+
 .styleBlockBegin {
   background-color: lightblue;
 }
@@ -17,7 +20,15 @@
   background-color: #37e016;
 }
 
-.styleBlockBlue{
+.styleBlockBlue {
   background-color: blue;
   color: white;
+}
+
+.styleBlockBegin,
+.styleBlockWait,
+.styleBlockGreen,
+.styleBlockBlue {
+  padding: 20%;
+  border-radius: 25px;
 }
